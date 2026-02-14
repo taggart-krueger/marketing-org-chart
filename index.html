@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Taggart â Marketing Org Chart</title>
+<title>Taggart &mdash; Marketing Org Chart</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
@@ -448,7 +448,7 @@
     <img src="https://avatars.slack-edge.com/2025-12-09/10093551916532_ce8ebc2f63883ecbb8df_original.jpg" alt="Taggart Krueger" style="width:100%;height:100%;object-fit:cover;">
   </div>
   <h1>Taggart Krueger</h1>
-  <p>Q1 Marketing Budget â $1,050,000</p>
+  <p>Q1 Marketing Budget &mdash; $1,050,000</p>
 </div>
 
 <div class="divisions">
@@ -466,7 +466,7 @@
             <div class="avatar"><img src="https://avatars.slack-edge.com/2025-07-15/9225113524144_2dc35721b9e09c01d1b6_original.png" alt="Brandon Thurgood"></div>
             <div class="person-info">
               <div class="person-name">Brandon Thurgood <span class="vp-badge">VP</span></div>
-              <div class="person-role">VP of Marketing â Post Purchase</div>
+              <div class="person-role">VP of Marketing &mdash; Post Purchase</div>
             </div>
           </div>
           <div class="person" onclick="openProfile('kate')">
@@ -600,7 +600,7 @@
 
 <div class="legend">
   <div class="legend-item"><div class="legend-dot filled"></div><span>Filled</span></div>
-  <div class="legend-item"><div class="legend-dot open"></div><span>Open Role â click to view JD</span></div>
+  <div class="legend-item"><div class="legend-dot open"></div><span>Open Role &mdash; click to view JD</span></div>
 </div>
 
 <!-- Modal -->
@@ -633,7 +633,7 @@ function toggleTeam(teamName) {
 const profiles = {
   brandon: {
     name: 'Brandon Thurgood',
-    title: 'VP of Marketing â Post Purchase',
+    title: 'VP of Marketing &mdash; Post Purchase',
     photo: 'https://avatars.slack-edge.com/2025-07-15/9225113524144_2dc35721b9e09c01d1b6_original.png',
     email: 'brandon@redo.com',
     phone: '(801) 360-2728',
@@ -686,7 +686,7 @@ const profiles = {
   },
   braxton: {
     name: 'Braxton Landvatter',
-    title: 'Founding Marketer â Shipping',
+    title: 'Founding Marketer &mdash; Shipping',
     photo: 'https://avatars.slack-edge.com/2025-10-06/9659795901953_1d54b7cf6b6ebdd85da5_original.jpg',
     email: 'braxton@redo.com',
     phone: '',
@@ -698,7 +698,7 @@ const profiles = {
     statusAway: false,
     stats: { campaigns: '20+', pipelineInfluenced: '$1.2M', contentPieces: 45, tenure: '19 weeks' },
     statsLabels: { campaigns: 'Campaigns', pipelineInfluenced: 'Pipeline Influenced', contentPieces: 'Content Pieces', tenure: 'Tenure' },
-    description: 'Braxton is the founding marketer for Redo\'s shipping product line. He owns the full marketing stack â from positioning and messaging to campaign execution and performance analytics. He\'s building the playbook from scratch as the sole marketer on the shipping side.',
+    description: 'Braxton is the founding marketer for Redo\'s shipping product line. He owns the full marketing stack &mdash; from positioning and messaging to campaign execution and performance analytics. He\'s building the playbook from scratch as the sole marketer on the shipping side.',
     tags: ['Full-Stack Marketing', 'Shipping', 'Campaign Strategy', 'Product Marketing', 'Analytics'],
     comp: { base: '$70,000', variable: '$30,000', type: 'salary' }
   },
@@ -716,7 +716,7 @@ const profiles = {
     statusAway: false,
     stats: { creatorsManaged: '100+', dealsSourced: 35, outreach: '500+/mo', tenure: '14 weeks' },
     statsLabels: { creatorsManaged: 'Creators Managed', dealsSourced: 'Deals Sourced', outreach: 'Outreach / Mo', tenure: 'Tenure' },
-    description: 'Edward runs creator and influencer outreach for Hook Marketing, Redo\'s creator-powered marketing product. He identifies, recruits, and manages relationships with content creators to drive brand partnerships and product adoption. As his Slack title says â he\'s "handing you deals on a golden platter."',
+    description: 'Edward runs creator and influencer outreach for Hook Marketing, Redo\'s creator-powered marketing product. He identifies, recruits, and manages relationships with content creators to drive brand partnerships and product adoption. As his Slack title says &mdash; he\'s "handing you deals on a golden platter."',
     tags: ['Creator Economy', 'Influencer Marketing', 'Outreach', 'Partnerships', 'Relationship Mgmt'],
     comp: { base: '$70,000', variable: '$30,000', type: 'salary' }
   },
@@ -806,7 +806,7 @@ const profiles = {
     statusAway: false,
     stats: { pagesManaged: '50+', uptime: '99.9%', convRate: '+22%', tenure: '1 week' },
     statsLabels: { pagesManaged: 'Pages Managed', uptime: 'Uptime', convRate: 'Conv. Rate Lift', tenure: 'Tenure' },
-    description: 'Jacob owns Redo\'s web presence â from the marketing site to landing pages, conversion optimization, and web analytics. He ensures the site is fast, on-brand, and continuously optimized to convert visitors into customers.',
+    description: 'Jacob owns Redo\'s web presence &mdash; from the marketing site to landing pages, conversion optimization, and web analytics. He ensures the site is fast, on-brand, and continuously optimized to convert visitors into customers.',
     tags: ['Web Development', 'CRO', 'Analytics', 'SEO', 'Landing Pages'],
     comp: { base: '', variable: '', type: '' }
   }
@@ -856,7 +856,7 @@ function openProfile(key) {
       </div>
       <div class="detail-row">
         <div class="detail-icon">&#128193;</div>
-        <div><div class="detail-label">Division / Team</div><div class="detail-value">${p.division} â ${p.team}</div></div>
+        <div><div class="detail-label">Division / Team</div><div class="detail-value">${p.division} &rarr; ${p.team}</div></div>
       </div>
     </div>
     ${p.comp && p.comp.base ? (compUnlocked[key] ?
@@ -951,21 +951,21 @@ function revealComp(key) {
 // ========= JOB DESCRIPTIONS =========
 const jobDescriptions = {
   content: {
-    badge: 'green', badgeText: 'Post Purchase â Logistics',
-    title: 'Content Marketer', subtitle: 'Full-time Â· Remote / Salt Lake City',
+    badge: 'green', badgeText: 'Post Purchase &mdash; Logistics',
+    title: 'Content Marketer', subtitle: 'Full-time &middot; Remote / Salt Lake City',
     sections: [
       { heading: 'About the Role', body: 'We\'re looking for a Content Marketer to own the post-purchase content strategy across Redo\'s logistics products. You\'ll craft compelling narratives that help brands turn returns, exchanges, and order tracking into moments of delight.' },
       { heading: 'Responsibilities', list: ['Develop and execute a content calendar spanning blog posts, case studies, email campaigns, and social media','Collaborate with the Events team (Kate & Maddie) to produce event-related content and recaps','Partner with Product Marketing to translate feature releases into customer-facing stories','Manage SEO strategy and organic growth for post-purchase content','Track content performance metrics and iterate based on data'] },
-      { heading: 'Qualifications', list: ['2â4 years of experience in content marketing, preferably in e-commerce or SaaS','Excellent writing and storytelling skills with a portfolio of published work','Experience with SEO tools (Ahrefs, SEMrush, or similar)','Comfortable with analytics platforms (GA4, HubSpot, etc.)','Self-starter who thrives in a fast-paced, startup environment'] }
+      { heading: 'Qualifications', list: ['2&ndash;4 years of experience in content marketing, preferably in e-commerce or SaaS','Excellent writing and storytelling skills with a portfolio of published work','Experience with SEO tools (Ahrefs, SEMrush, or similar)','Comfortable with analytics platforms (GA4, HubSpot, etc.)','Self-starter who thrives in a fast-paced, startup environment'] }
     ]
   },
   founding: {
-    badge: 'amber', badgeText: 'Pre Purchase â CHOP & Marketing Cloud',
-    title: 'Founding Marketer', subtitle: 'Full-time Â· Remote / Salt Lake City',
+    badge: 'amber', badgeText: 'Pre Purchase &mdash; CHOP & Marketing Cloud',
+    title: 'Founding Marketer', subtitle: 'Full-time &middot; Remote / Salt Lake City',
     sections: [
-      { heading: 'About the Role', body: 'This is a founding marketing role spanning two product lines â CHOP and Marketing Cloud. You\'ll be the first marketer dedicated to Redo\'s pre-purchase suite, building the go-to-market playbook from scratch.' },
-      { heading: 'Responsibilities', list: ['Build and own the full marketing strategy for CHOP and Marketing Cloud from the ground up','Define positioning, messaging, and competitive differentiation for both product lines','Launch campaigns across paid, organic, email, and partner channels','Work closely with Product and Sales to drive pipeline and accelerate adoption','Establish KPIs, track performance, and report on growth metrics','Be the voice of the customer â gather insights and feed them back into product development'] },
-      { heading: 'Qualifications', list: ['3â6 years of B2B SaaS or e-commerce marketing experience','Demonstrated ability to build marketing programs from zero to one','Strong analytical mindset â comfortable making data-driven decisions','Experience with marketing automation, CRM, and analytics tools','Entrepreneurial energy and willingness to wear many hats','Bonus: experience in the Shopify / e-commerce ecosystem'] }
+      { heading: 'About the Role', body: 'This is a founding marketing role spanning two product lines &mdash; CHOP and Marketing Cloud. You\'ll be the first marketer dedicated to Redo\'s pre-purchase suite, building the go-to-market playbook from scratch.' },
+      { heading: 'Responsibilities', list: ['Build and own the full marketing strategy for CHOP and Marketing Cloud from the ground up','Define positioning, messaging, and competitive differentiation for both product lines','Launch campaigns across paid, organic, email, and partner channels','Work closely with Product and Sales to drive pipeline and accelerate adoption','Establish KPIs, track performance, and report on growth metrics','Be the voice of the customer &mdash; gather insights and feed them back into product development'] },
+      { heading: 'Qualifications', list: ['3&ndash;6 years of B2B SaaS or e-commerce marketing experience','Demonstrated ability to build marketing programs from zero to one','Strong analytical mindset &mdash; comfortable making data-driven decisions','Experience with marketing automation, CRM, and analytics tools','Entrepreneurial energy and willingness to wear many hats','Bonus: experience in the Shopify / e-commerce ecosystem'] }
     ]
   }
 };
