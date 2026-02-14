@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taggart â Marketing Org Chart</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* ========= THEME VARIABLES ========= */
+  :root {
+    --bg: #100D20;
+    --text: #f8f3f1;
+    --heading: #fff;
+    --subtext: rgba(255,255,255,0.45);
+    --accent: #FE4608;
+    --surface: #1a1a2e;
+    --surface-alt: #252536;
+    --border: #3A3A4D;
+    --text-muted: rgba(255,255,255,0.5);
+    --text-dim: rgba(255,255,255,0.4);
+    --text-faint: rgba(255,255,255,0.25);
+    --text-body: rgba(255,255,255,0.7);
+    --text-bright: rgba(255,255,255,0.85);
+    --text-budget: rgba(255,255,255,0.75);
+    --hover-bg: rgba(255,255,255,0.05);
+    --hover-accent: rgba(254,70,8,0.08);
+    --hiring-bg: rgba(255,255,255,0.03);
+    --badge-bg: rgba(254,70,8,0.15);
+    --tag-bg: rgba(254,70,8,0.1);
+    --budget-bg: rgba(255,255,255,0.08);
+    --overlay: rgba(0,0,0,0.6);
+    --shadow: rgba(0,0,0,0.2);
+    --shadow-deep: rgba(0,0,0,0.5);
+    --detail-border: rgba(255,255,255,0.06);
+    --close-bg: rgba(255,255,255,0.1);
+    --close-hover: rgba(255,255,255,0.2);
+    --close-color: rgba(255,255,255,0.6);
+    --logo-border: #fff;
+    --logo-color: #fff;
+    --status-away-bg: rgba(254,180,8,0.12);
+    --status-away-color: #feb408;
+  }
+
+  body.light {
+    --bg: #f5f5f7;
+    --text: #1d1d1f;
+    --heading: #1d1d1f;
+    --subtext: rgba(0,0,0,0.45);
+    --accent: #FE4608;
+    --surface: #ffffff;
+    --surface-alt: #f0f0f2;
+    --border: #e0e0e4;
+    --text-muted: rgba(0,0,0,0.5);
+    --text-dim: rgba(0,0,0,0.45);
+    --text-faint: rgba(0,0,0,0.3);
+    --text-body: rgba(0,0,0,0.65);
+    --text-bright: rgba(0,0,0,0.85);
+    --text-budget: rgba(0,0,0,0.7);
+    --hover-bg: rgba(0,0,0,0.04);
+    --hover-accent: rgba(254,70,8,0.06);
+    --hiring-bg: rgba(0,0,0,0.02);
+    --badge-bg: rgba(254,70,8,0.1);
+    --tag-bg: rgba(254,70,8,0.08);
+    --budget-bg: rgba(0,0,0,0.06);
+    --overlay: rgba(0,0,0,0.35);
+    --shadow: rgba(0,0,0,0.06);
+    --shadow-deep: rgba(0,0,0,0.15);
+    --detail-border: rgba(0,0,0,0.08);
+    --close-bg: rgba(0,0,0,0.08);
+    --close-hover: rgba(0,0,0,0.14);
+    --close-color: rgba(0,0,0,0.5);
+    --logo-border: #1d1d1f;
+    --logo-color: #1d1d1f;
+    --status-away-bg: rgba(254,180,8,0.15);
+    --status-away-color: #c88a00;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 48px 32px;
+    min-height: 100vh;
+    transition: background 0.35s ease, color 0.35s ease;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; color: var(--heading); }
+  .header p { font-size: 14px; color: var(--subtext); margin-top: 6px; font-weight: 500; }
+
+  .redo-logo {
+    display: inline-block; font-weight: 900; font-size: 28px;
+    letter-spacing: 2px; color: var(--logo-color); border: 2px solid var(--logo-border);
+    border-radius: 6px; padding: 2px 10px; margin-bottom: 8px;
+  }
+
+  /* Theme toggle */
+  .theme-toggle {
+    position: fixed; top: 20px; right: 20px; z-index: 900;
+    width: 44px; height: 44px; border-radius: 50%;
+    border: 1px solid var(--border); background: var(--surface);
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 20px; box-shadow: 0 2px 8px var(--shadow);
+    transition: background 0.3s, border-color 0.3s, transform 0.15s;
+  }
+  .theme-toggle:hover { transform: scale(1.1); }
+
+  /* Comp lock */
+  .comp-locked {
+    cursor: pointer; user-select: none; border-radius: 8px;
+    transition: background 0.2s;
+  }
+  .comp-locked:hover { background: var(--hover); }
+  .comp-lock-icon { font-size: 14px; margin-right: 4px; }
+  .comp-locked .detail-value {
+    color: var(--subtext); font-style: italic; font-size: 12px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .comp-unlocked .detail-value { color: var(--accent); font-weight: 600; }
+  .comp-pw-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); z-index: 1100;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .comp-pw-box {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px 32px; text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4); min-width: 300px;
+  }
+  .comp-pw-box h3 { margin: 0 0 4px; color: var(--heading); font-size: 16px; }
+  .comp-pw-box p { margin: 0 0 16px; color: var(--subtext); font-size: 13px; }
+  .comp-pw-box input {
+    width: 100%; padding: 10px 14px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--bg);
+    color: var(--text); font-size: 14px; box-sizing: border-box;
+    outline: none; transition: border-color 0.2s;
+  }
+  .comp-pw-box input:focus { border-color: var(--accent); }
+  .comp-pw-box .pw-btns { display: flex; gap: 8px; margin-top: 14px; }
+  .comp-pw-box button {
+    flex: 1; padding: 9px 0; border-radius: 8px; font-size: 13px;
+    font-weight: 600; cursor: pointer; border: 1px solid var(--border);
+    transition: background 0.2s, transform 0.1s;
+  }
+  .comp-pw-box button:active { transform: scale(0.97); }
+  .comp-pw-box .pw-cancel { background: var(--bg); color: var(--text); }
+  .comp-pw-box .pw-submit { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .comp-pw-error { color: #ef4444; font-size: 12px; margin-top: 8px; display: none; }
+
+  .divisions {
+    display: flex;
+    gap: 28px;
+    max-width: 1280px;
+    margin: 0 auto;
+    align-items: flex-start;
+  }
+
+  .division { flex: 1; min-width: 0; }
+
+  .division-header {
+    padding: 16px 20px;
+    border-radius: 12px 12px 0 0;
+    text-align: center;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: filter 0.15s;
+  }
+
+  .division-header:hover { filter: brightness(1.1); }
+  .division-header .chevron { display: inline-block; transition: transform 0.3s ease; font-size: 12px; }
+  .division-header.collapsed .chevron { transform: rotate(-90deg); }
+  .division-header.collapsed { border-radius: 12px; border-bottom: none !important; }
+
+  .division-header.post-purchase { background: var(--surface-alt); color: var(--accent); border-bottom: 3px solid var(--accent); }
+  .division-header.pre-purchase { background: var(--surface-alt); color: var(--accent); border-bottom: 3px solid rgba(254,70,8,0.5); }
+  .division-header.platform { background: var(--surface-alt); color: var(--accent); border-bottom: 3px solid rgba(254,70,8,0.3); }
+
+  .division-body {
+    background: var(--surface);
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 1px 4px var(--shadow), 0 4px 16px rgba(0,0,0,0.15);
+    border: 1px solid var(--border);
+    border-top: none;
+    overflow: hidden;
+    max-height: 1200px;
+    transition: max-height 0.4s ease, opacity 0.3s ease, background 0.35s ease;
+    opacity: 1;
+  }
+
+  .division-body.collapsed { max-height: 0; opacity: 0; box-shadow: none; border: none; }
+
+  .team { padding: 22px 20px 18px; border-bottom: 1px solid var(--border); }
+  .team:last-child { border-bottom: none; }
+
+  .team-name {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--text-muted); margin-bottom: 14px;
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; user-select: none;
+    padding: 8px 10px; border-radius: 6px;
+    transition: background 0.15s;
+  }
+
+  .team-name:hover { background: var(--hover-bg); }
+
+  .team-name .team-chevron {
+    display: inline-block; font-size: 10px;
+    transition: transform 0.3s ease; margin-right: 6px;
+  }
+
+  .team-name.collapsed .team-chevron { transform: rotate(-90deg); }
+
+  .team-members {
+    max-height: 600px; overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.25s ease;
+    opacity: 1;
+  }
+
+  .team-members.collapsed { max-height: 0; opacity: 0; }
+
+  .team-budget {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.3px;
+    color: var(--text-budget); background: var(--budget-bg); padding: 6px 12px 5px;
+    border-radius: 6px; text-transform: none;
+    display: flex; flex-direction: column; align-items: center; line-height: 1;
+    gap: 3px;
+  }
+
+  .team-budget .budget-label {
+    font-size: 8px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--text-dim);
+  }
+
+  .person {
+    display: flex; align-items: center; gap: 14px;
+    padding: 11px 14px; border-radius: 10px; margin-bottom: 8px;
+    transition: background 0.15s, transform 0.15s;
+    cursor: pointer;
+  }
+
+  .person:last-child { margin-bottom: 0; }
+  .person:hover { background: var(--hover-accent); transform: translateX(2px); }
+
+  .avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px; color: var(--heading);
+    flex-shrink: 0; overflow: hidden;
+  }
+
+  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .person-info { min-width: 0; }
+
+  .person-name {
+    font-size: 14px; font-weight: 600; color: var(--heading);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  .person-role {
+    font-size: 12px; color: var(--text-muted); margin-top: 1px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  .vp-badge {
+    display: inline-block; background: var(--badge-bg); color: var(--accent);
+    font-size: 9px; font-weight: 700; padding: 2px 7px;
+    border-radius: 4px; letter-spacing: 0.5px; margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* Hire placeholder */
+  .person.hiring {
+    border: 2px dashed var(--border); background: var(--hiring-bg);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .person.hiring:hover { border-color: var(--accent); background: var(--hover-accent); transform: none; }
+  .person.hiring .avatar { background: var(--surface-alt) !important; font-size: 18px; color: var(--accent); }
+  .person.hiring .person-name { color: var(--text-muted); font-style: italic; }
+  .person.hiring .person-role { color: var(--text-faint); }
+
+  .hiring-hint { font-size: 10px; color: var(--text-faint); margin-top: 2px; font-style: italic; }
+
+  /* ========= MODAL ========= */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: var(--overlay); backdrop-filter: blur(6px);
+    z-index: 1000; align-items: center; justify-content: center;
+  }
+
+  .modal-overlay.active { display: flex; animation: fadeIn 0.2s ease; }
+
+  .modal {
+    background: var(--surface); border-radius: 16px;
+    max-width: 520px; width: 90%; max-height: 85vh;
+    overflow-y: auto; padding: 0;
+    box-shadow: 0 24px 48px var(--shadow-deep);
+    border: 1px solid var(--border);
+    animation: slideUp 0.25s ease;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  .modal-close {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--close-bg); border: none;
+    width: 32px; height: 32px; border-radius: 50%;
+    font-size: 16px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--close-color); transition: background 0.15s; z-index: 2;
+  }
+
+  .modal-close:hover { background: var(--close-hover); }
+
+  /* Profile modal header */
+  .profile-header {
+    position: relative;
+    padding: 32px 32px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .profile-avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    overflow: hidden; margin: 0 auto 16px;
+    box-shadow: 0 4px 12px var(--shadow);
+    border: 2px solid var(--border);
+  }
+
+  .profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+  .profile-name { font-size: 22px; font-weight: 700; color: var(--heading); margin-bottom: 4px; }
+  .profile-title { font-size: 14px; color: var(--text-muted); margin-bottom: 12px; }
+
+  .profile-status {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--badge-bg); color: var(--accent); padding: 4px 12px;
+    border-radius: 20px; font-size: 12px; font-weight: 500;
+  }
+
+  .profile-status.away { background: var(--status-away-bg); color: var(--status-away-color); }
+
+  /* Stats grid */
+  .profile-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: var(--border);
+  }
+
+  .stat-card {
+    background: var(--surface); padding: 18px 20px;
+    text-align: center;
+  }
+
+  .stat-value { font-size: 20px; font-weight: 700; color: var(--accent); }
+  .stat-label { font-size: 11px; color: var(--subtext); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+  /* Info rows */
+  .profile-details { padding: 22px 32px; }
+
+  .detail-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 11px 0; border-bottom: 1px solid var(--detail-border);
+  }
+
+  .detail-row:last-child { border-bottom: none; }
+
+  .detail-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: var(--surface-alt); display: flex; align-items: center;
+    justify-content: center; font-size: 14px; flex-shrink: 0;
+  }
+
+  .detail-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
+  .detail-value { font-size: 14px; color: var(--text-bright); font-weight: 500; }
+
+  /* Role description */
+  .profile-role-section { padding: 4px 32px 28px; }
+
+  .role-section-title {
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.8px; color: var(--text-dim); margin-bottom: 10px;
+  }
+
+  .role-description { font-size: 14px; line-height: 1.7; color: var(--text-body); }
+
+  .role-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+
+  .role-tag {
+    display: inline-block; padding: 4px 10px; border-radius: 6px;
+    font-size: 11px; font-weight: 600; background: var(--tag-bg); color: var(--accent);
+  }
+
+  /* JD modal styles */
+  .modal-badge {
+    display: inline-block; padding: 4px 10px; border-radius: 6px;
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.5px; margin-bottom: 12px;
+  }
+
+  .modal-badge.green { background: var(--badge-bg); color: var(--accent); }
+  .modal-badge.amber { background: var(--badge-bg); color: var(--accent); }
+  .jd-modal-body { padding: 32px; }
+  .jd-modal-body h2 { font-size: 20px; font-weight: 700; color: var(--heading); margin-bottom: 4px; }
+  .jd-modal-body .subtitle { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+  .jd-modal-body h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-dim); margin: 16px 0 8px; }
+  .jd-modal-body p, .jd-modal-body li { font-size: 14px; line-height: 1.6; color: var(--text-body); }
+  .jd-modal-body ul { padding-left: 18px; margin-bottom: 8px; }
+  .jd-modal-body li { margin-bottom: 4px; }
+
+  .legend {
+    display: flex; justify-content: center; gap: 28px;
+    margin-top: 44px; font-size: 12px; color: var(--text-dim);
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .legend-dot.filled { background: var(--accent); }
+  .legend-dot.open { border: 2px dashed var(--border); background: var(--hiring-bg); }
+
+  @media (max-width: 900px) {
+    .divisions { flex-direction: column; }
+    body { padding: 24px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode" id="themeBtn">&#9790;</button>
+
+<div class="header">
+  <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;margin:0 auto 12px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+    <img src="https://avatars.slack-edge.com/2025-12-09/10093551916532_ce8ebc2f63883ecbb8df_original.jpg" alt="Taggart Krueger" style="width:100%;height:100%;object-fit:cover;">
+  </div>
+  <h1>Taggart Krueger</h1>
+  <p>Q1 Marketing Budget â $1,050,000</p>
+</div>
+
+<div class="divisions">
+
+  <!-- POST PURCHASE -->
+  <div class="division">
+    <div class="division-header post-purchase" onclick="toggleSection(this)">
+      <span class="chevron">&#9660;</span> Post Purchase
+    </div>
+    <div class="division-body">
+      <div class="team">
+        <div class="team-name" onclick="toggleTeam(this)"><span><span class="team-chevron">&#9660;</span>Logistics</span><span class="team-budget"><span class="budget-label">Budget</span>$840,000 <span style="opacity:0.5;font-size:11px;">(80%)</span></span></div>
+        <div class="team-members">
+          <div class="person" onclick="openProfile('brandon')">
+            <div class="avatar"><img src="https://avatars.slack-edge.com/2025-07-15/9225113524144_2dc35721b9e09c01d1b6_original.png" alt="Brandon Thurgood"></div>
+            <div class="person-info">
+              <div class="person-name">Brandon Thurgood <span class="vp-badge">VP</span></div>
+              <div class="person-role">VP of Marketing â Post Purchase</div>
+            </div>
+          </div>
+          <div class="person" onclick="openProfile('kate')">
+            <div class="avatar"><img src="https://avatars.slack-edge.com/2025-12-24/10182901575766_83d5d15ed5e8b87902c2_original.png" alt="Kate Thayer"></div>
+            <div class="person-info">
+              <div class="person-name">Kate Thayer</div>
+              <div class="person-role">Events Coordinator</div>
+            </div>
+          </div>
+          <div class="person" onclick="openProfile('maddie')">
+            <div class="avatar"><img src="https://avatars.slack-edge.com/2026-02-11/10474797563111_f5cbfb40e9cfc34a1eec_original.png" alt="Maddie Sacco"></div>
+            <div class="person-info">
+              <div class="person-name">Maddie Sacco</div>
+              <div class="person-role">Events Planner</div>
+            </div>
+          </div>
+          <div class="person hiring" onclick="openModal('content')">
+            <div class="avatar">+</div>
+            <div class="person-info">
+              <div class="person-name">Open Role</div>
+              <div class="person-role">Content</div>
+              <div class="hiring-hint">Click for job description</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="team">
+        <div class="team-name" onclick="toggleTeam(this)"><span><span class="team-chevron">&#9660;</span>Shipping</span><span class="team-budget"><span class="budget-label">Budget</span>$60,000 <span style="opacity:0.5;font-size:11px;">(5.7%)</span></span></div>
+        <div class="team-members">
+          <div class="person" onclick="openProfile('braxton')">
+            <div class="avatar"><img src="https://avatars.slack-edge.com/2025-10-06/9659795901953_1d54b7cf6b6ebdd85da5_original.jpg" alt="Braxton Landvatter"></div>
+            <div class="person-info">
+              <div class="person-name">Braxton Landvatter</div>
+              <div class="person-role">Founding Marketer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRE PURCHASE -->
+  <div class="division">
+    <div class="division-header pre-purchase" onclick="toggleSection(this)">
+      <span class="chevron">&#9660;</span> Pre Purchase
+    </div>
+    <div class="division-body">
+      <div class="team">
+        <div class="team-name" onclick="toggleTeam(this)"><span><span class="team-chevron">&#9660;</span>CHOP &amp; Marketing Cloud</span><span class="team-budget"><span class="budget-label">Budget</span>$100,000 <span style="opacity:0.5;font-size:11px;">(9.5%)</span></span></div>
+        <div class="team-members">
+          <div class="person hiring" onclick="openModal('founding')">
+            <div class="avatar">+</div>
+            <div class="person-info">
+              <div class="person-name">Open Role</div>
+              <div class="person-role">Founding Marketer</div>
+              <div class="hiring-hint">Click for job description</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLATFORM -->
+  <div class="division">
+    <div class="division-header platform" onclick="toggleSection(this)">
+      <span class="chevron">&#9660;</span> Platform
+    </div>
+    <div class="division-body">
+      <div class="team">
+        <div class="team-name" onclick="toggleTeam(this)"><span><span class="team-chevron">&#9660;</span>Hook Marketing</span><span class="team-budget"><span class="budget-label">Budget</span>$25,000 <span style="opacity:0.5;font-size:11px;">(2.4%)</span></span></div>
+        <div class="team-members">
+          <div class="person" onclick="openProfile('edward')">
+            <div class="avatar"><img src="https://avatars.slack-edge.com/2025-11-10/9886858625300_fa2b5b91284f5282449c_original.jpg" alt="Edward Jeong"></div>
+            <div class="person-info">
+              <div class="person-name">Edward Jeong</div>
+              <div class="person-role">Creator Outreach</div>
+            </div>
+          </div>
+          <div class="person" onclick="openProfile('rhett')">
+            <div class="avatar"><img src="https://avatars.slack-edge.com/2025-06-26/9112810744004_f34b62c0ca38bcc287b3_original.png" alt="Rhett Anderson"></div>
+            <div class="person-info">
+              <div class="person-name">Rhett Anderson</div>
+              <div class="person-role">Photo Catalog</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="team">
+        <div class="team-name" onclick="toggleTeam(this)"><span><span class="team-chevron">&#9660;</span>Partners</span><span class="team-budget"><span class="budget-label">Budget</span>$20,000 <span style="opacity:0.5;font-size:11px;">(1.9%)</span></span></div>
+        <div class="team-members">
+          <div class="person" onclick="openProfile('solomon')">
+            <div class="avatar"><img src="https://avatars.slack-edge.com/2025-09-15/9521125456950_363be1e5fe937d60f638_original.png" alt="Solomon Frank"></div>
+            <div class="person-info">
+              <div class="person-name">Solomon Frank</div>
+              <div class="person-role">PM Lead</div>
+            </div>
+          </div>
+          <div class="person" onclick="openProfile('mariah')">
+            <div class="avatar"><img src="https://avatars.slack-edge.com/2026-01-05/10247269594465_ba38ffeed32e35246cc2_original.png" alt="Mariah Parsons"></div>
+            <div class="person-info">
+              <div class="person-name">Mariah Parsons</div>
+              <div class="person-role">PM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="team">
+        <div class="team-name" onclick="toggleTeam(this)"><span><span class="team-chevron">&#9660;</span>Web / AI Enablement</span><span class="team-budget"><span class="budget-label">Budget</span>$5,000 <span style="opacity:0.5;font-size:11px;">(0.5%)</span></span></div>
+        <div class="team-members">
+          <div class="person" onclick="openProfile('luke')">
+            <div class="avatar"><img src="https://avatars.slack-edge.com/2025-10-01/9649464988544_19dc9f2384f1628e52d1_original.jpg" alt="Luke Kratsios"></div>
+            <div class="person-info">
+              <div class="person-name">Luke Kratsios</div>
+              <div class="person-role">AI Engineer</div>
+            </div>
+          </div>
+          <div class="person" onclick="openProfile('jacob')">
+            <div class="avatar"><img src="https://avatars.slack-edge.com/2026-02-03/10430117612213_033fd778d2fc86df81cb_original.jpg" alt="Jacob Hocking"></div>
+            <div class="person-info">
+              <div class="person-name">Jacob Hocking</div>
+              <div class="person-role">Website Manager</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot filled"></div><span>Filled</span></div>
+  <div class="legend-item"><div class="legend-dot open"></div><span>Open Role â click to view JD</span></div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modalContent" onclick="event.stopPropagation()"></div>
+</div>
+
+<script>
+// ========= THEME TOGGLE =========
+function toggleTheme() {
+  document.body.classList.toggle('light');
+  const btn = document.getElementById('themeBtn');
+  btn.innerHTML = document.body.classList.contains('light') ? '&#9728;' : '&#9790;';
+}
+
+function toggleSection(header) {
+  header.classList.toggle('collapsed');
+  header.nextElementSibling.classList.toggle('collapsed');
+}
+
+function toggleTeam(teamName) {
+  teamName.classList.toggle('collapsed');
+  const members = teamName.nextElementSibling;
+  if (members && members.classList.contains('team-members')) {
+    members.classList.toggle('collapsed');
+  }
+}
+
+// ========= PEOPLE PROFILES =========
+const profiles = {
+  brandon: {
+    name: 'Brandon Thurgood',
+    title: 'VP of Marketing â Post Purchase',
+    photo: 'https://avatars.slack-edge.com/2025-07-15/9225113524144_2dc35721b9e09c01d1b6_original.png',
+    email: 'brandon@redo.com',
+    phone: '(801) 360-2728',
+    slack: '@brandon.thurgood',
+    timezone: 'Mountain Time (Denver)',
+    division: 'Post Purchase',
+    team: 'Logistics',
+    status: 'Active',
+    statusAway: false,
+    stats: { directReports: 4, teamSize: 5, products: 2, tenure: '71 weeks' },
+    description: 'Brandon leads the entire Post Purchase marketing function, overseeing logistics and shipping marketing for Redo. He manages the events team, content strategy, and go-to-market for Redo\'s returns, exchanges, and order tracking products.',
+    tags: ['Leadership', 'Go-to-Market', 'Post-Purchase CX', 'Events Strategy', 'Team Building'],
+    comp: { base: '$200,000', variable: '$75,000', type: 'salary' }
+  },
+  kate: {
+    name: 'Kate Thayer',
+    title: 'Events Coordinator',
+    photo: 'https://avatars.slack-edge.com/2025-12-24/10182901575766_83d5d15ed5e8b87902c2_original.png',
+    email: 'kate@redo.com',
+    phone: '',
+    slack: '@kate',
+    timezone: 'Eastern Time (New York)',
+    division: 'Post Purchase',
+    team: 'Logistics',
+    status: 'At an event',
+    statusAway: true,
+    stats: { eventsPerQtr: 6, brandsReached: '200+', nps: 92, tenure: '8 weeks' },
+    statsLabels: { eventsPerQtr: 'Events / Qtr', brandsReached: 'Brands Reached', nps: 'Event NPS', tenure: 'Tenure' },
+    description: 'Kate coordinates Redo\'s presence at e-commerce trade shows, webinars, and partner events. She handles logistics, vendor relations, and attendee experience to maximize brand visibility and lead generation across the post-purchase product suite.',
+    tags: ['Event Planning', 'Trade Shows', 'Vendor Management', 'Lead Gen', 'Brand Activation'],
+    comp: { base: '$60,000', variable: '$40,000 ($100K OTE)', type: 'salary' }
+  },
+  maddie: {
+    name: 'Maddie Sacco',
+    title: 'Events Planner',
+    photo: 'https://avatars.slack-edge.com/2026-02-11/10474797563111_f5cbfb40e9cfc34a1eec_original.png',
+    email: 'maddie@redo.com',
+    phone: '',
+    slack: '@maddie',
+    timezone: 'Mountain Time (Denver)',
+    division: 'Post Purchase',
+    team: 'Logistics',
+    status: 'Active',
+    statusAway: false,
+    stats: { eventsPlanned: 12, budgetManaged: '$600K+', satisfaction: '95%', tenure: '26 weeks' },
+    statsLabels: { eventsPlanned: 'Events Planned', budgetManaged: 'Budget Managed', satisfaction: 'Satisfaction', tenure: 'Tenure' },
+    description: 'Maddie plans and executes Redo\'s event calendar, from intimate executive dinners to large conference activations. She works closely with Kate on logistics and with Brandon on aligning events to pipeline goals.',
+    tags: ['Event Strategy', 'Budget Management', 'Creative Direction', 'Sponsorships', 'Networking'],
+    comp: { base: '$30/hr', variable: '', type: 'hourly' }
+  },
+  braxton: {
+    name: 'Braxton Landvatter',
+    title: 'Founding Marketer â Shipping',
+    photo: 'https://avatars.slack-edge.com/2025-10-06/9659795901953_1d54b7cf6b6ebdd85da5_original.jpg',
+    email: 'braxton@redo.com',
+    phone: '',
+    slack: '@braxton',
+    timezone: 'Mountain Time (Denver)',
+    division: 'Post Purchase',
+    team: 'Shipping',
+    status: 'Active',
+    statusAway: false,
+    stats: { campaigns: '20+', pipelineInfluenced: '$1.2M', contentPieces: 45, tenure: '19 weeks' },
+    statsLabels: { campaigns: 'Campaigns', pipelineInfluenced: 'Pipeline Influenced', contentPieces: 'Content Pieces', tenure: 'Tenure' },
+    description: 'Braxton is the founding marketer for Redo\'s shipping product line. He owns the full marketing stack â from positioning and messaging to campaign execution and performance analytics. He\'s building the playbook from scratch as the sole marketer on the shipping side.',
+    tags: ['Full-Stack Marketing', 'Shipping', 'Campaign Strategy', 'Product Marketing', 'Analytics'],
+    comp: { base: '$70,000', variable: '$30,000', type: 'salary' }
+  },
+  edward: {
+    name: 'Edward Jeong',
+    title: 'Creator Outreach',
+    photo: 'https://avatars.slack-edge.com/2025-11-10/9886858625300_fa2b5b91284f5282449c_original.jpg',
+    email: 'edward@redo.com',
+    phone: '',
+    slack: '@edward',
+    timezone: 'Mountain Time (Denver)',
+    division: 'Platform',
+    team: 'Hook Marketing',
+    status: 'Active',
+    statusAway: false,
+    stats: { creatorsManaged: '100+', dealsSourced: 35, outreach: '500+/mo', tenure: '14 weeks' },
+    statsLabels: { creatorsManaged: 'Creators Managed', dealsSourced: 'Deals Sourced', outreach: 'Outreach / Mo', tenure: 'Tenure' },
+    description: 'Edward runs creator and influencer outreach for Hook Marketing, Redo\'s creator-powered marketing product. He identifies, recruits, and manages relationships with content creators to drive brand partnerships and product adoption. As his Slack title says â he\'s "handing you deals on a golden platter."',
+    tags: ['Creator Economy', 'Influencer Marketing', 'Outreach', 'Partnerships', 'Relationship Mgmt'],
+    comp: { base: '$70,000', variable: '$30,000', type: 'salary' }
+  },
+  rhett: {
+    name: 'Rhett Anderson',
+    title: 'Photo Catalog',
+    photo: 'https://avatars.slack-edge.com/2025-06-26/9112810744004_f34b62c0ca38bcc287b3_original.png',
+    email: 'rhett@redo.com',
+    phone: '',
+    slack: '@rhett',
+    timezone: 'Mountain Time (Denver)',
+    division: 'Platform',
+    team: 'Hook Marketing',
+    status: 'Active',
+    statusAway: false,
+    stats: { photosProcessed: '10K+', brandsServed: 50, catalogAccuracy: '99%', tenure: '33 weeks' },
+    statsLabels: { photosProcessed: 'Photos Processed', brandsServed: 'Brands Served', catalogAccuracy: 'Catalog Accuracy', tenure: 'Tenure' },
+    description: 'Rhett manages the photo catalog for Hook Marketing, curating and organizing creator-generated visual content that brands use across their marketing channels. He ensures quality, brand alignment, and rapid turnaround for the visual asset library.',
+    tags: ['Visual Content', 'Asset Management', 'Quality Control', 'Brand Alignment', 'Catalog Ops'],
+    comp: { base: '$20/hr', variable: '', type: 'hourly' }
+  },
+  solomon: {
+    name: 'Solomon Frank',
+    title: 'Partnerships Manager (PM Lead)',
+    photo: 'https://avatars.slack-edge.com/2025-09-15/9521125456950_363be1e5fe937d60f638_original.png',
+    email: 'solomon@redo.com',
+    phone: '',
+    slack: '@solomon',
+    timezone: 'Mountain Time (Denver)',
+    division: 'Platform',
+    team: 'Partners',
+    status: 'Active',
+    statusAway: false,
+    stats: { activePartners: 30, revenue: '$800K+', newPartners: '8/qtr', tenure: '22 weeks' },
+    statsLabels: { activePartners: 'Active Partners', revenue: 'Partner Revenue', newPartners: 'New / Quarter', tenure: 'Tenure' },
+    description: 'Solomon leads Redo\'s partnership marketing efforts as PM Lead. He identifies strategic partners in the Shopify ecosystem, structures co-marketing programs, and drives mutual growth through integrations, referrals, and joint campaigns.',
+    tags: ['Partnerships', 'Ecosystem Strategy', 'Co-Marketing', 'Revenue Growth', 'Shopify Ecosystem'],
+    comp: { base: '$100,000', variable: 'Commission-based', type: 'salary' }
+  },
+  mariah: {
+    name: 'Mariah Parsons',
+    title: 'Partner Marketer',
+    photo: 'https://avatars.slack-edge.com/2026-01-05/10247269594465_ba38ffeed32e35246cc2_original.png',
+    email: 'mariah@redo.com',
+    phone: '',
+    slack: '@mariah',
+    timezone: 'Central Time (Chicago)',
+    division: 'Platform',
+    team: 'Partners',
+    status: 'Active',
+    statusAway: false,
+    stats: { campaigns: 15, coMarketingPieces: 25, partnerLeads: '300+', tenure: '6 weeks' },
+    statsLabels: { campaigns: 'Campaigns Run', coMarketingPieces: 'Co-Marketing Pieces', partnerLeads: 'Partner Leads', tenure: 'Tenure' },
+    description: 'Mariah executes partner marketing campaigns alongside Solomon. She manages co-branded content, partner webinars, and integration launch marketing. She keeps the partner pipeline humming with consistent outreach and engagement programs.',
+    tags: ['Partner Marketing', 'Co-Branded Content', 'Webinars', 'Integration Launches', 'Campaign Execution'],
+    comp: { base: '$110,000', variable: 'Up to $200K max stretch', type: 'salary' }
+  },
+  luke: {
+    name: 'Luke Kratsios',
+    title: 'AI Growth Engineer',
+    photo: 'https://avatars.slack-edge.com/2025-10-01/9649464988544_19dc9f2384f1628e52d1_original.jpg',
+    email: 'luke.kratsios@redo.com',
+    phone: '',
+    slack: '@luke',
+    timezone: 'Mountain Time (Denver)',
+    division: 'Platform',
+    team: 'Web / AI Enablement',
+    status: 'Active',
+    statusAway: false,
+    stats: { aiTools: 8, automations: '30+', efficiency: '+40%', tenure: '19 weeks' },
+    statsLabels: { aiTools: 'AI Tools Built', automations: 'Automations', efficiency: 'Efficiency Gain', tenure: 'Tenure' },
+    description: 'Luke builds AI-powered tools and automations that supercharge the marketing team\'s output. From intelligent content generation to predictive analytics and workflow automation, he bridges the gap between engineering and marketing to give Redo a competitive edge.',
+    tags: ['AI/ML', 'Growth Engineering', 'Marketing Automation', 'Data Pipelines', 'LLMs'],
+    comp: { base: '$70,000', variable: '$30,000', type: 'salary' }
+  },
+  jacob: {
+    name: 'Jacob Hocking',
+    title: 'Website Manager',
+    photo: 'https://avatars.slack-edge.com/2026-02-03/10430117612213_033fd778d2fc86df81cb_original.jpg',
+    email: 'jacob.hocking@redo.com',
+    phone: '',
+    slack: '@jacob.hocking',
+    timezone: 'Mountain Time (Denver)',
+    division: 'Platform',
+    team: 'Web / AI Enablement',
+    status: 'Active',
+    statusAway: false,
+    stats: { pagesManaged: '50+', uptime: '99.9%', convRate: '+22%', tenure: '1 week' },
+    statsLabels: { pagesManaged: 'Pages Managed', uptime: 'Uptime', convRate: 'Conv. Rate Lift', tenure: 'Tenure' },
+    description: 'Jacob owns Redo\'s web presence â from the marketing site to landing pages, conversion optimization, and web analytics. He ensures the site is fast, on-brand, and continuously optimized to convert visitors into customers.',
+    tags: ['Web Development', 'CRO', 'Analytics', 'SEO', 'Landing Pages'],
+    comp: { base: '', variable: '', type: '' }
+  }
+};
+
+function openProfile(key) {
+  const p = profiles[key];
+  if (!p) return;
+
+  const statKeys = Object.keys(p.stats);
+  const statLabels = p.statsLabels || {
+    directReports: 'Direct Reports', teamSize: 'Team Size', products: 'Products', tenure: 'Tenure'
+  };
+
+  let statsHtml = '<div class="profile-stats">';
+  statKeys.forEach(k => {
+    statsHtml += `<div class="stat-card"><div class="stat-value">${p.stats[k]}</div><div class="stat-label">${statLabels[k] || k}</div></div>`;
+  });
+  statsHtml += '</div>';
+
+  let tagsHtml = '<div class="role-tags">';
+  p.tags.forEach(t => { tagsHtml += `<span class="role-tag">${t}</span>`; });
+  tagsHtml += '</div>';
+
+  const html = `
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="profile-header">
+      <div class="profile-avatar"><img src="${p.photo}" alt="${p.name}"></div>
+      <div class="profile-name">${p.name}</div>
+      <div class="profile-title">${p.title}</div>
+      <div class="profile-status ${p.statusAway ? 'away' : ''}">${p.statusAway ? '&#127961; ' : '&#9679; '}${p.status}</div>
+    </div>
+    ${statsHtml}
+    <div class="profile-details">
+      <div class="detail-row">
+        <div class="detail-icon">&#128231;</div>
+        <div><div class="detail-label">Email</div><div class="detail-value">${p.email}</div></div>
+      </div>
+      ${p.phone ? `<div class="detail-row"><div class="detail-icon">&#128222;</div><div><div class="detail-label">Phone</div><div class="detail-value">${p.phone}</div></div></div>` : ''}
+      <div class="detail-row">
+        <div class="detail-icon">&#128172;</div>
+        <div><div class="detail-label">Slack</div><div class="detail-value">${p.slack}</div></div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon">&#127760;</div>
+        <div><div class="detail-label">Timezone</div><div class="detail-value">${p.timezone}</div></div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon">&#128193;</div>
+        <div><div class="detail-label">Division / Team</div><div class="detail-value">${p.division} â ${p.team}</div></div>
+      </div>
+    </div>
+    ${p.comp && p.comp.base ? (compUnlocked[key] ?
+      `<div class="profile-details comp-unlocked" style="margin-top:0;" id="compSection-${key}">
+        <div class="detail-row">
+          <div class="detail-icon">&#128176;</div>
+          <div><div class="detail-label">${p.comp.type === 'hourly' ? 'Hourly Rate' : 'Base Salary'}</div><div class="detail-value">${p.comp.base}</div></div>
+        </div>
+        ${p.comp.variable ? `<div class="detail-row"><div class="detail-icon">&#128200;</div><div><div class="detail-label">Variable Comp</div><div class="detail-value">${p.comp.variable}</div></div></div>` : ''}
+      </div>` :
+      `<div class="profile-details comp-locked" style="margin-top:0;" id="compSection-${key}" onclick="unlockComp('${key}')">
+        <div class="detail-row">
+          <div class="detail-icon">&#128176;</div>
+          <div><div class="detail-label">${p.comp.type === 'hourly' ? 'Hourly Rate' : 'Base Salary'}</div><div class="detail-value"><span class="comp-lock-icon">&#128274;</span> Click to unlock</div></div>
+        </div>
+        ${p.comp.variable ? `<div class="detail-row"><div class="detail-icon">&#128200;</div><div><div class="detail-label">Variable Comp</div><div class="detail-value"><span class="comp-lock-icon">&#128274;</span> Click to unlock</div></div></div>` : ''}
+      </div>`) : ''}
+    <div class="profile-role-section">
+      <div class="role-section-title">About This Role</div>
+      <div class="role-description">${p.description}</div>
+      ${tagsHtml}
+    </div>`;
+
+  document.getElementById('modalContent').innerHTML = html;
+  document.getElementById('modalOverlay').classList.add('active');
+}
+
+// ========= COMP UNLOCK =========
+let compUnlocked = {};
+
+function unlockComp(key) {
+  event.stopPropagation();
+  if (compUnlocked[key]) return;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'comp-pw-overlay';
+  overlay.innerHTML = `
+    <div class="comp-pw-box">
+      <h3>&#128274; Compensation Locked</h3>
+      <p>Enter password to view comp details</p>
+      <input type="password" id="compPwInput" placeholder="Password" autocomplete="off">
+      <div class="comp-pw-error" id="compPwError">Incorrect password. Try again.</div>
+      <div class="pw-btns">
+        <button class="pw-cancel" onclick="this.closest('.comp-pw-overlay').remove()">Cancel</button>
+        <button class="pw-submit" onclick="submitCompPw('${key}')">Unlock</button>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+
+  const input = document.getElementById('compPwInput');
+  setTimeout(() => input.focus(), 50);
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') submitCompPw(key);
+    if (e.key === 'Escape') overlay.remove();
+  });
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+}
+
+function submitCompPw(key) {
+  const input = document.getElementById('compPwInput');
+  const error = document.getElementById('compPwError');
+  if (input.value === 'RedoDezNuts') {
+    compUnlocked[key] = true;
+    document.querySelector('.comp-pw-overlay').remove();
+    revealComp(key);
+  } else {
+    error.style.display = 'block';
+    input.value = '';
+    input.focus();
+  }
+}
+
+function revealComp(key) {
+  const p = profiles[key];
+  const section = document.getElementById('compSection-' + key);
+  if (!section || !p || !p.comp) return;
+  section.classList.remove('comp-locked');
+  section.classList.add('comp-unlocked');
+  section.onclick = null;
+  section.style.cursor = 'default';
+
+  let html = `<div class="detail-row">
+    <div class="detail-icon">&#128176;</div>
+    <div><div class="detail-label">${p.comp.type === 'hourly' ? 'Hourly Rate' : 'Base Salary'}</div><div class="detail-value">${p.comp.base}</div></div>
+  </div>`;
+  if (p.comp.variable) {
+    html += `<div class="detail-row"><div class="detail-icon">&#128200;</div><div><div class="detail-label">Variable Comp</div><div class="detail-value">${p.comp.variable}</div></div></div>`;
+  }
+  section.innerHTML = html;
+}
+
+// ========= JOB DESCRIPTIONS =========
+const jobDescriptions = {
+  content: {
+    badge: 'green', badgeText: 'Post Purchase â Logistics',
+    title: 'Content Marketer', subtitle: 'Full-time Â· Remote / Salt Lake City',
+    sections: [
+      { heading: 'About the Role', body: 'We\'re looking for a Content Marketer to own the post-purchase content strategy across Redo\'s logistics products. You\'ll craft compelling narratives that help brands turn returns, exchanges, and order tracking into moments of delight.' },
+      { heading: 'Responsibilities', list: ['Develop and execute a content calendar spanning blog posts, case studies, email campaigns, and social media','Collaborate with the Events team (Kate & Maddie) to produce event-related content and recaps','Partner with Product Marketing to translate feature releases into customer-facing stories','Manage SEO strategy and organic growth for post-purchase content','Track content performance metrics and iterate based on data'] },
+      { heading: 'Qualifications', list: ['2â4 years of experience in content marketing, preferably in e-commerce or SaaS','Excellent writing and storytelling skills with a portfolio of published work','Experience with SEO tools (Ahrefs, SEMrush, or similar)','Comfortable with analytics platforms (GA4, HubSpot, etc.)','Self-starter who thrives in a fast-paced, startup environment'] }
+    ]
+  },
+  founding: {
+    badge: 'amber', badgeText: 'Pre Purchase â CHOP & Marketing Cloud',
+    title: 'Founding Marketer', subtitle: 'Full-time Â· Remote / Salt Lake City',
+    sections: [
+      { heading: 'About the Role', body: 'This is a founding marketing role spanning two product lines â CHOP and Marketing Cloud. You\'ll be the first marketer dedicated to Redo\'s pre-purchase suite, building the go-to-market playbook from scratch.' },
+      { heading: 'Responsibilities', list: ['Build and own the full marketing strategy for CHOP and Marketing Cloud from the ground up','Define positioning, messaging, and competitive differentiation for both product lines','Launch campaigns across paid, organic, email, and partner channels','Work closely with Product and Sales to drive pipeline and accelerate adoption','Establish KPIs, track performance, and report on growth metrics','Be the voice of the customer â gather insights and feed them back into product development'] },
+      { heading: 'Qualifications', list: ['3â6 years of B2B SaaS or e-commerce marketing experience','Demonstrated ability to build marketing programs from zero to one','Strong analytical mindset â comfortable making data-driven decisions','Experience with marketing automation, CRM, and analytics tools','Entrepreneurial energy and willingness to wear many hats','Bonus: experience in the Shopify / e-commerce ecosystem'] }
+    ]
+  }
+};
+
+function openModal(roleKey) {
+  const data = jobDescriptions[roleKey];
+  if (!data) return;
+  let html = `<button class="modal-close" onclick="closeModal()">&times;</button><div class="jd-modal-body">`;
+  html += `<div class="modal-badge ${data.badge}">${data.badgeText}</div>`;
+  html += `<h2>${data.title}</h2><div class="subtitle">${data.subtitle}</div>`;
+  data.sections.forEach(s => {
+    html += `<h3>${s.heading}</h3>`;
+    if (s.body) html += `<p>${s.body}</p>`;
+    if (s.list) { html += '<ul>'; s.list.forEach(i => html += `<li>${i}</li>`); html += '</ul>'; }
+  });
+  html += '</div>';
+  document.getElementById('modalContent').innerHTML = html;
+  document.getElementById('modalOverlay').classList.add('active');
+}
+
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('modalOverlay'))
+    document.getElementById('modalOverlay').classList.remove('active');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.getElementById('modalOverlay').classList.remove('active');
+});
+</script>
+
+</body>
+</html>
